@@ -1,0 +1,26 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "back": "Back",
+        "send": "Send"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "An unexpected error occurred, please contact the office."
+    },
+    "errorLabels": {
+        "title": "Erro"
+    },
+    "errorMessages": {
+        "unableToRegister": "Unable to register the new attendee, please contact support."
+    },
+    "registerLabels": {
+        "title": "New Attendee",
+        "badge": "Badge",
+        "scan": "Scan",
+        "name": "Name",
+        "company": "Company"
+    },
+    "registerDescriptions": {
+        "warningClosing": "All data will be lost.\n\n\n Continue ?"
+    }
+}

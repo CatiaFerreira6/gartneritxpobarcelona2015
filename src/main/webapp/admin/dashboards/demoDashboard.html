@@ -1,0 +1,86 @@
+<section id="dashboard-page" data-ng-controller="DemoDashboardController" class="row-fluid full-height">
+    <nav class="row-fluid dashboard-navigation" data-ng-if="!bigDashboard">
+        <a id="fullscreen-dashboard-link" href="#/dashboard?fullscreen" target="_blank"><i class="fa fa-lg fa-external-link"></i></a>
+    </nav>
+    <section>
+        <section class="span7 white bordered full-height">
+            <div class="title title-background vertical-align-outer">
+                <h2 class="vertical-align-inner">{{labels.LatestMovements[lang]}}</h2>
+            </div>
+            <div class="row-fluid latest-movements-content">
+                <table class="table-details latest-movements full-height">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="movement in latestMovements">
+                        <td>{{movement.movementType.description | localizedDescription: lang }}</td>
+                        <td>{{movement.inStatusSince | date:'HH:mm'}}</td>
+                        <td>{{movement.container.number}}{{movement.cargo.number}}</td>
+                        <td>{{valueForUDF(movement, "Name")}}</td>
+                        <td>{{valueForUDF(movement, "Company")}}</td>
+                        <td><div class="user-photo" data-ng-class="movement.updateUser.username"></div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="span5 full-height">
+            <section class="row-fluid last-movement-section white bordered">
+                <div class="title title-background vertical-align-outer">
+                    <h2 class="vertical-align-inner">{{labels.LatestMovement[lang]}}</h2>
+                </div>
+                <div class="row-fluid last-movement-content">
+                    <section class="row-fluid full-height" data-ng-if="latestMovement.movementType.code !== 'SELFIE'">
+                        <div class="movement-info vertical-align-outer">
+                            <div class="vertical-align-inner"><p>{{latestMovement.movementType.description | localizedDescription: lang}}</p>
+                                <p data-ng-if="latestMovement.movementType.code == 'TRACKING'">{{labels.Of[lang]}}&nbsp;{{latestMovement.container.number}}{{latestMovement.cargo.number}}</p>
+                                <p data-ng-if="latestMovement.movementType.code == 'REGISTERED_NEW_ATTENDEE'">{{valueForUDF(latestMovement, "Name")}}</p>
+                                <p data-ng-if="latestMovement && latestMovement.movementType.code != 'TRACKING' && latestMovement.movementType.code != 'REGISTERED_NEW_ATTENDEE'">{{labels.To[lang]}}&nbsp;{{valueForUDF(latestMovement, "Name")}}</p>
+                            </div>
+                        </div>
+                        <div class="date vertical-align-outer">
+                            <p class="vertical-align-inner">{{latestMovement.inStatusSince | date:'HH:mm:ss'}}</p>
+                        </div>
+                    </section>
+                    <section class="row-fluid full-height" data-ng-if="latestMovement.movementType.code == 'SELFIE'">
+                        <div class="thanks vertical-align-outer">
+                            <p>{{labels.ThankYou[lang]}}&nbsp;{{valueForUDF(latestMovement, "Name")}}</p>
+                        </div>
+                        <div class="row-fluid last-movement-carousel-container"
+                             data-ng-if="latestMovement.movementType.code == 'SELFIE'">
+                            <div class="last-movement-carousel full-height">
+                                <carousel interval="carouselInterval" class="full-height">
+                                    <slide data-ng-repeat="slide in carouselSlides" active="slide.active" class="full-height">
+                                        <img data-ng-src="{{slide.image}}">
+                                    </slide>
+                                </carousel>
+                            </div>
+                        </div>
+                        <div class="date vertical-align-outer">
+                            <p class="vertical-align-inner">{{latestMovement.inStatusSince | date:'HH:mm:ss'}}</p>
+                        </div>
+                    </section>
+                </div>
+            </section>
+            <div class="section-spacer"></div>
+            <section class="row-fluid white bordered demo-counter-section">
+                <div class="title title-background vertical-align-outer">
+                    <h2 class="vertical-align-inner">{{labels.DemoCount[lang]}}</h2>
+                </div>
+                <section class="large-padding">
+                    <div class="vertical-align-outer">
+                        <span class="demo-counter vertical-align-inner">{{demoCount}}</span>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>

@@ -1,0 +1,58 @@
+<section data-ng-switch data-on="mode">
+    <div id="alert" data-ng-show="alertIsVisible">
+        <div data-ng-show="alertType == 'info' " class="alert-info"><i class="fa fa-info-circle"></i>&nbsp; {{alertMessage}}</div>
+        <div data-ng-show="alertType == 'error' " class="alert-error"><i class="fa fa-exclamation-circle"></i>&nbsp; {{alertMessage}}</div>
+        <div data-ng-show="alertType == 'success' " class="alert-success"><i class="fa fa-check-circle"></i>&nbsp; {{alertMessage}}</div>
+    </div>
+    <form data-ng-switch-when="read-code" class="body-margin" name="readCode" novalidate>
+        <div class="tracking-form">
+            <div class="space-top-xs text-center">
+                <label for="code">{{descriptions.ReadCode}}</label>
+                <div class="clearfix">
+                    <input class="input col-xs-12 col-sm-6 col-sm-offset-3" autocomplete="off"
+                        id="code" name="code" data-ng-model="code" data-mb-auto-focus="focus">
+                </div>
+            </div>
+        </div>
+        <div class="tracking-buttons">
+            <div data-ng-if="showBarcodeScan" class="text-center full-width space-bottom-xs">
+                <button data-ng-click="scanCode()" type="button" class="round-button">{{labels.Scan}}</button>
+            </div>
+            <button type="submit" class="btn btn-lg btn-action pull-right" data-ng-click="confirmCode(code)">{{globalLabels.Next}}</button>
+            <button type="button" class="btn btn-lg" data-ng-click="back()">{{globalLabels.Back}}</button>
+        </div>
+    </form>
+    <form data-ng-switch-when="location" name="location" class="body-margin" novalidate>
+        <div class="tracking-form">
+            <div>
+                <label for="location-item-number">{{descriptions.ReadItemNumber}}</label>
+                <div class="clearfix">
+                    <input class="input col-xs-9" id="location-item-number" autocomplete="off"
+                        name="locationItemNumber" data-ng-model="locationItem.number" data-mb-auto-focus="focus">
+                    <button class="btn btn-lg btn-action btn-ok pull-right"
+                        data-ng-click="confirmLocationItem(locationItem.number)">{{globalLabels.Ok}}</button>
+                </div>
+            </div>
+            <div class="space-top-xs">
+                <button class="btn btn-link small items-header" data-ng-click="removeLocationItems(locationItems)">{{labels.Remove}}</button>
+                <span class="pull-right small items-header">{{labels.Count}} {{locationTrackCount}}</span>
+            </div>
+            <div class="items" data-ng-class="{'items-with-scan': showBarcodeScan}">
+                <table>
+                    <tbody>
+                        <tr data-ng-repeat="item in locationItems" data-ng-click="setSelected(item)">
+                            <td><input type="checkbox" data-ng-model="item.checked" data-ng-change="setSelected(item)"></td>
+                            <td data-ng-if="item.containerType.id">{{item.number}}<br><span>{{labels.Container}}&nbsp;/&nbsp;{{item.containerType.description | localizedDescription: lang}}</span></td>
+                            <td data-ng-if="item.cargoType.id">{{item.number}}<br><span>{{labels.Cargo}}&nbsp;/&nbsp;{{item.cargoType.description | localizedDescription: lang}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tracking-buttons">
+            <button data-ng-if="showBarcodeScan" data-ng-click="scanCode()" type="button" class="round-button">{{labels.Scan}}</button>
+            <button class="btn btn-lg btn-action pull-right" data-ng-click="sendLocationItems(locationItems)">{{globalLabels.Send}}</button>
+            <button type="button" class="btn btn-lg" data-ng-click="back()">{{globalLabels.Back}}</button>
+        </div>
+    </form>
+</section>

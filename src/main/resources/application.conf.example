@@ -1,0 +1,5 @@
+//The configurations in this file will only be used in local development, not in production.
+spin.pluginClass = "com.atomizesoftware.gartnerbarcelona2015.GartnerBarcelona2015"
+c3p0.jdbcUrl = "jdbc:postgresql://localhost/gartnerbarcelona2015"
+c3p0.user = "postgres"
+c3p0.password = "123456"

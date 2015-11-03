@@ -1,0 +1,47 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "next": "Next",
+        "back": "Back",
+        "send": "Send"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "An unexpected error occurred, please contact the office."
+    },
+    "errorLabels": {
+        "title": "Erro"
+    },
+    "errorMessages": {
+        "locationNotFound": "The given location was not found.",
+        "unableToSendItems": "Unable to send items, please try again or contact the office.",
+        "itemAlreadyOnTrackingList": "This item is already on the tracking list"
+    },
+    "trackingLabels": {
+        "remove": "Remove",
+        "count": "Count:",
+        "container": "Container",
+        "cargo": "Cargo",
+        "location": "Location",
+        "scan": "Scan",
+        "number": "Number",
+        "tracking": "Tracking",
+        "items": "items"
+    },
+    "trackingDescriptions": {
+        "warningClosing": "All data will be lost.\n\n\nContinue?",
+        "whatIs": "What is ",
+        "readCode": "Location or Item",
+        "readItemNumber": "Container or Cargo",
+        "locationCode": "Location Code",
+        "selectLocation": "Select a location",
+        "trackItem": "Track",
+        "inLocation": "in location"
+    },
+    "resolverErrors": {
+        "userTitle": "User",
+        "deviceTitle": "Device",
+        "movementParam": "No movement identification found.",
+        "userParam": "No user identification found.",
+        "deviceParam": "No device identification found."
+    }
+}

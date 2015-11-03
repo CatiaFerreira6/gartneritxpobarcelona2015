@@ -1,0 +1,30 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "back": "Voltar",
+        "send": "Enviar"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "Ocorreu um erro inesperado, por favor contacte o escritório."
+    },
+    "errorLabels": {
+        "title": "Erro"
+    },
+    "errorMessages": {
+        "unableToPerformDemo": "Não é possível continuar com a demo, por favor, tente novamente ou entre em contato com o suporte."
+    },
+    "demoLabels": {
+        "title": "Demo de Participante",
+        "performTracking": "Efectuar Track de um item",
+        "showGeoMap": "Mostrar mapa geográfico",
+        "showRoute": "Mostrar rota no mapa geográfico",
+        "showLayoutMap": "Mostrar mapa SVG com detalhes",
+        "takeSelfie":  "Tirar uma Selfie",
+        "giveNotebook": "Oferecer Caderno de Notas",
+        "endDemo": "Finalizar Demo",
+        "scan": "Ler"
+    },
+    "demoDescriptions": {
+        "warningClosing": "Todos os dados serão perdidos.\n\n\n Continuar ?"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "back": "Voltar",
+        "send": "Enviar"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "Ocorreu um erro inesperado, por favor contacte o escritório."
+    },
+    "errorLabels": {
+        "title": "Erro"
+    },
+    "errorMessages": {
+        "unableToRegister": "Não foi possível fazer o registo. Por favor tente novamente ou contacte o suporte."
+    },
+    "registerLabels": {
+        "title": "Novo Participante",
+        "badge": "Badge",
+        "scan": "Ler",
+        "name": "Nome",
+        "company": "Empresa"
+    },
+    "registerDescriptions": {
+        "warningClosing": "Todos os dados serão perdidos.\n\n\n Continuar ?"
+    }
+}

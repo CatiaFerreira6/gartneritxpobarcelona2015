@@ -1,0 +1,151 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.body-margin {
+    margin-bottom: 55px !important;
+}
+
+.demo-buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.demo-buttons .btn {
+    width: 50%;
+    padding: 12px 12px !important;
+}
+
+.demo-form {
+    padding: 10px 10px 0;
+}
+
+.demo-form .btn {
+    text-align: left;
+}
+
+.required:after {
+    font-weight: bold;
+    color: #CD1231;
+    content: ' *';
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 0 !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    outline: none !important;
+}
+
+.btn.btn-action:hover,
+.btn.btn-action:focus,
+.btn.btn-action:active {
+    background-color: #CD1231;
+    color: #fff;
+}
+
+.btn-lg {
+    padding: 8px 12px !important;
+}
+
+.btn-action {
+    background-color: #CD1231;
+    color: #fff;
+    padding: 12px 12px !important;
+}
+
+.btn-action-inverted,
+.btn.btn-action-inverted:hover,
+.btn.btn-action-inverted:focus,
+.btn.btn-action-inverted:active
+{
+    box-shadow: none;
+    background-color: transparent;
+    color: #CD1231;
+}
+
+.btn-option {
+    font-size: 20px !important;
+    padding: 24px 12px !important;
+}
+
+.input {
+    font-size: 16px;
+    margin: 0 0 4px;
+    padding: 8px 8px 6px 8px;
+    position: relative;
+    display: block;
+    vertical-align: middle;
+    outline: none;
+    border: none;
+    background: bottom left -webkit-gradient(linear, left top, right top, color-stop(0%,#dddddd), color-stop(100%,#dddddd)) no-repeat, bottom right -webkit-gradient(linear, left top, right top, color-stop(0%,#dddddd), color-stop(100%,#dddddd)) no-repeat;
+    background: bottom left -webkit-linear-gradient(left, #dddddd 0%,#dddddd 100%) no-repeat, bottom right -webkit-linear-gradient(left, #dddddd 0%,#dddddd 100%) no-repeat;
+    background: bottom left linear-gradient(#dddddd, #dddddd) no-repeat, bottom right linear-gradient(#dddddd, #dddddd) no-repeat;
+    background-size: 1px 6px, 1px 6px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.input:focus
+{
+    margin-bottom: 3px;
+    background: bottom left -webkit-gradient(linear, left top, right top, color-stop(0%,#CD1231), color-stop(100%,#CD1231)) no-repeat, bottom right -webkit-gradient(linear, left top, right top, color-stop(0%,#CD1231), color-stop(100%,#CD1231)) no-repeat;
+    background: bottom left -webkit-linear-gradient(left, #CD1231 0%,#CD1231 100%) no-repeat, bottom right -webkit-linear-gradient(left, #CD1231 0%,#CD1231 100%) no-repeat;
+    background: bottom left linear-gradient(#CD1231, #CD1231) no-repeat, bottom right linear-gradient(#CD1231, #CD1231) no-repeat;
+    background-size: 2px 6px, 2px 6px;
+    border-bottom: 2px solid #CD1231;
+}
+
+.control-label {
+    margin: 5px 0 0 0;
+}
+
+.form {
+    height: 390px !important;
+}
+
+.pictures {
+    height: 100px;
+    border: 1px solid #999;
+    width: 99%;
+    padding: 2px !important;
+}
+
+.pictures > div {
+    overflow: auto;
+    white-space: nowrap;
+    padding: 0 !important;
+}
+
+.pictures img {
+    height: 90px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.pictures button {
+    height: 90px;
+    font-size: 26px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 2px 0;
+    padding: 12px 0 !important;
+}

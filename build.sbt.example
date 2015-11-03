@@ -1,0 +1,144 @@
+import AssemblyKeys._
+import sbtassembly.Plugin._
+import ohnosequences.sbt.SbtS3Resolver._
+import com.amazonaws.services.s3.model.Region
+import com.typesafe.config._
+
+val systemSeparator = System.getProperty("file.separator")
+val targetDir = s"${systemSeparator}dist"
+val targetPluginDir = targetDir + systemSeparator + "gartnerbarcelona2015"
+val resourcesDir = s"src${systemSeparator}main${systemSeparator}resources${systemSeparator}"
+val conf = ConfigFactory.parseFile(new File(resourcesDir + "application.conf")).resolve()
+val spinVersion = "Hydrogen-2015.11.03.0"
+
+val packagePlugin = taskKey[Unit]("creates and copies jar to the plugin defined place")
+
+def appendPluginFiles(baseDir: Types.Id[File]) = {
+  val lines: List[String] = IO.readLines(new File(resourcesDir + "application.conf"))
+  val dir: File = baseDir / targetDir
+  if (!lines.exists(m => m.contains("spin.pluginFiles"))) {
+    IO.append(new File(resourcesDir + "application.conf"),
+      s"""
+         |
+         |spin.pluginFiles = "${dir.absolutePath.replace("\\","\\\\")}"""".stripMargin)
+  }
+  if(!lines.exists(m => m.contains("spin.theme")) && (baseDir / "theme").exists()) {
+    IO.append(new File(resourcesDir + "application.conf"),
+      s"""
+      |spin.theme = "${(baseDir / "theme").absolutePath.replace("\\","\\\\")}"""".stripMargin)
+  }
+  if(!lines.exists(m => m.contains("spin.reports")) && (baseDir / "reports").exists()) {
+    IO.append(new File(resourcesDir + "application.conf"),
+      s"""
+      |spin.reports = "${(baseDir / "reports").absolutePath.replace("\\","\\\\")}"""".stripMargin)
+  }
+  if(!lines.exists(m => m.contains("spin.helpDocs")) && (baseDir / "helpDocs").exists()) {
+    IO.append(new File(resourcesDir + "application.conf"),
+      s"""
+      |spin.helpDocs = "${(baseDir / "helpDocs").absolutePath.replace("\\","\\\\")}"""".stripMargin)
+  }
+  if(!lines.exists(m => m.contains("spin.documents")) && (baseDir / "documents").exists()) {
+    IO.append(new File(resourcesDir + "application.conf"),
+      s"""
+      |spin.documents = "${(baseDir / "documents").absolutePath.replace("\\","\\\\")}"""".stripMargin)
+  }
+  if(!lines.exists(m => m.contains("spin.adminConfig")) && (baseDir / "adminConfig").exists()) {
+    IO.append(new File(resourcesDir + "application.conf"),
+      s"""
+         |spin.adminConfig = "${(baseDir / "adminConfig").absolutePath.replace("\\","\\\\")}"""".stripMargin)
+  }
+}
+
+def pluginConf(baseDir: Types.Id[File], name: String, version: String): Unit = {
+  val dir = pluginDir(baseDir)
+  if(dir.exists) {IO.delete(dir)}
+  if(!dir.exists) { IO.createDirectory(dir)}
+  val pluginConfDir: String = s"${systemSeparator}plugin.conf"
+  val pluginConf: File = baseDir / targetPluginDir / pluginConfDir
+  IO.write(pluginConf, s"name = $name\nversion = $version\nspin.version = $spinVersion")
+  val webappBase = baseDir / "src" / "main" / "webapp"
+  for {
+    (from, to) <- (webappBase ** ("*" -- ".DS_Store") ** "*") pair rebase(webappBase, dir)
+  } yield {
+    Sync.copy(from, to)
+  }
+}
+
+def pluginBackendDir(baseDir: Types.Id[File]): File = {
+  val dir = pluginDir(baseDir)
+  if(!dir.exists){ IO.createDirectory(dir) }
+  val pluginBackendDir: String = s"${systemSeparator}backend"
+  baseDir / targetPluginDir / pluginBackendDir
+}
+
+def pluginDir(baseDir: Types.Id[File]): File = baseDir / targetPluginDir
+
+name := "GartnerBarcelona2015"
+
+version := "0.1-SNAPSHOT"
+
+scalaVersion := "2.11.4"
+
+mainClass in (Compile, run) := Some("com.atomizesoftware.spin.JettyLauncher")
+
+parallelExecution in Test := false
+
+compile <<= (compile in Compile) dependsOn packagePlugin
+
+run <<= (run in Compile) dependsOn packagePlugin
+
+runMain <<= (runMain in Compile) dependsOn packagePlugin
+
+test <<= (test in Test) dependsOn packagePlugin
+
+testOnly <<= (testOnly in Test) dependsOn packagePlugin
+
+testQuick <<= (testQuick in Test) dependsOn packagePlugin
+
+packagePlugin <<= (baseDirectory, packageBin in Compile, version, name) map {(baseDir, jar, vs, nm) =>
+  pluginConf(baseDir, nm, vs)
+  appendPluginFiles(baseDir)
+  val dir = pluginBackendDir(baseDir)
+  IO.move(jar, dir / jar.name)
+}
+
+packageOptions in (Compile, packageBin) += {
+  val pluginClass: String = if(conf.hasPath("spin.pluginClass")) conf.getString ("spin.pluginClass") else "com.atomizesoftware.gartnerbarcelona2015.GartnerBarcelona2015"
+  Package.ManifestAttributes("Spin-PluginClass" -> pluginClass)
+}
+
+libraryDependencies += "com.atomizesoftware" %% "spin" % spinVersion % "provided"
+
+credentials += Credentials("Restricted","ivy.atomizesoftware.com","example@email.com","examplePassword")
+
+run in Compile <<= Defaults.runTask(fullClasspath in Compile, mainClass in (Compile, run), runner in (Compile, run))
+
+resolvers ++= Seq(
+  Resolver.url("Releases", url("https://ivy.atomizesoftware.com/releases.spin"))(Resolver.ivyStylePatterns),
+  Resolver.url("Snapshots", url("https://ivy.atomizesoftware.com/snapshots.spin"))(Resolver.ivyStylePatterns)
+)
+
+resolvers ++= Seq(
+  "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases",
+  "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
+  "Jasper Reports Third Party" at "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts",
+  "Moquette" at "http://dl.bintray.com/andsel/maven",
+  "Eclipse Paho" at "https://repo.eclipse.org/content/repositories/paho-releases/"
+)
+
+assemblySettings ++ Seq(
+  jarName in assembly := "GartnerBarcelona2015.jar",
+  outputPath in assembly <<= baseDirectory map { baseDir => pluginBackendDir(baseDir) / "GartnerBarcelona2015.jar"},
+  mergeStrategy in assembly <<= (mergeStrategy in assembly) {
+    (old) => {
+      case PathList("org","apache","commons","collections", xs @ _*) => MergeStrategy.first
+      case PathList("application.conf") => MergeStrategy.discard
+      case PathList(ps @ _*) if ps.last endsWith ".html" => MergeStrategy.discard
+      case PathList(ps @ _*) if ps.last endsWith ".json" => MergeStrategy.discard
+      case PathList(ps @ _*) if ps.last endsWith ".js" => MergeStrategy.discard
+      case x => old(x)
+    }
+  },
+  test in assembly := {},
+  assembleArtifact in packageScala := false
+)

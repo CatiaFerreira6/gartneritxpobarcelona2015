@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="sofia" id="201510270854" context="data">
+        <insert schemaName="public" tableName="User">
+            <column name="Name" value="Ana Hurtado" />
+            <column name="Username" value="ahurtado" />
+            <column name="Password" value="127361013782487762054374049624885" />
+            <column name="WrongPassword" valueNumeric="0" />
+            <column name="Active" valueBoolean="true" />
+            <column name="ApiKey" value="dD0VW2mA4mcvDviJyQuaqVLX8NzhoD"/>
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="User">
+            <column name="Name" value="Catia Ferreira" />
+            <column name="Username" value="cferreira" />
+            <column name="Password" value="127361013782487762054374049624885" />
+            <column name="WrongPassword" valueNumeric="0" />
+            <column name="Active" valueBoolean="true" />
+            <column name="ApiKey" value="Kkwqd6C3vMVOfp5hne6nQ8Cj9nw1Wq"/>
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="User">
+            <column name="Name" value="Pedro Carvalho" />
+            <column name="Username" value="pcarvalho" />
+            <column name="Password" value="127361013782487762054374049624885" />
+            <column name="WrongPassword" valueNumeric="0" />
+            <column name="Active" valueBoolean="true" />
+            <column name="ApiKey" value="sR4rTT8m8Juy1WXVdXnLWb8jxigLag"/>
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <sql>INSERT INTO "UserGroup" ("UserId", "GroupId")
+            Values ((Select "Id" from "User" where "Username" = 'ahurtado'), (Select "Id" from "Group" where "Code" = 'ADMINS')),
+            ((Select "Id" from "User" where "Username" = 'cferreira'), (Select "Id" from "Group" where "Code" = 'ADMINS')),
+            ((Select "Id" from "User" where "Username" = 'pcarvalho'), (Select "Id" from "Group" where "Code" = 'ADMINS'));</sql>
+        <insert schemaName="public" tableName="DocumentType">
+            <column name="Code" value="PHOTO"/>
+            <column name="Description" value="{&quot;en-GB&quot;:&quot;Photo&quot;,&quot;pt-PT&quot;:&quot;Fotografia&quot;,&quot;fr-FR&quot;:&quot;Photographie&quot;"/>
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="OrderStatus">
+            <column name="Code" value="PENDING" />
+            <column name="Description"
+                    value="{&quot;pt-PT&quot;:&quot;Pendente&quot;,&quot;en-GB&quot;:&quot;Pending&quot;,&quot;fr-FR&quot;:&quot;En attendant&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="OrderStatus">
+            <column name="Code" value="IN_PROGRESS" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;In Progress&quot;,&quot;pt-PT&quot;:&quot;Em execução&quot;,&quot;fr-FR&quot;:&quot;En Cours&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="OrderStatus">
+            <column name="Code" value="COMPLETED" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Completed&quot;,&quot;pt-PT&quot;:&quot;Concluída&quot;,&quot;fr-FR&quot;:&quot;Terminé&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="OrderType">
+            <column name="Code" value="WELCOME_ATTENDEE" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Welcome Attendee&quot;,&quot;pt-PT&quot;:&quot;Boas Vindas ao Participante&quot;,&quot;fr-FR&quot;:&quot;Bienvenue au participant&quot;}" />
+            <column name="Prefix" value="WA" />
+            <column name="OrderMetadata" value="{&quot;orderFields&quot;:[{&quot;name&quot;:&quot;orderStatusId&quot;,&quot;label&quot;:&quot;Order Status&quot;},{&quot;name&quot;:&quot;assignedUserId&quot;,&quot;label&quot;:&quot;Assigned User&quot;},{&quot;name&quot;:&quot;assignedGroupId&quot;,&quot;label&quot;:&quot;Assigned Group&quot;}]}"/>
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <sql>UPDATE "UserDefinedFieldsDefinition" SET "Fields" = '[{"code":"Name","type":"String","label":{"en-GB":"Name","pt-PT":"Nome","fr-FR":"Nombre"}},{"code":"Company","type":"String","label":{"en-GB":"Company","pt-PT":"Empresa","fr-FR":"Enterprise"}},{"code":"Badge","type":"String","label":{"en-GB":"Badge","pt-PT":"Badge","fr-FR":"Badge"}}]' WHERE "Code" in ('ORDER', 'MOVEMENT');</sql>
+        <insert schemaName="public" tableName="MovementStatus">
+            <column name="Code" value="PENDING" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Pending&quot;,&quot;pt-PT&quot;:&quot;Pendente&quot;,&quot;fr-FR&quot;:&quot;En attente&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementStatus">
+            <column name="Code" value="COMPLETED" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Completed&quot;,&quot;pt-PT&quot;:&quot;Efectuado&quot;,&quot;fr-FR&quot;:&quot;Effectuée&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementStatus">
+            <column name="Code" value="IN_PROGRESS" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;In progress&quot;,&quot;pt-PT&quot;:&quot;Em execução&quot;,&quot;fr-FR&quot;:&quot;En cours&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <sql>UPDATE "MovementStatus" SET "Default" = true WHERE "Code" = 'COMPLETED';</sql>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="TRACKING" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Tracking&quot;,&quot;pt-PT&quot;:&quot;Tracking&quot;,&quot;fr-FR&quot;:&quot;Mouvements&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Tracking&quot;,&quot;pt-PT&quot;:&quot;Tracking&quot;,&quot;fr-FR&quot;:&quot;Mouvements&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="true" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="REGISTERED_NEW_ATTENDEE" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;New Attendee&quot;,&quot;pt-PT&quot;:&quot;Novo Participante&quot;,&quot;fr-FR&quot;:&quot;Nouveau Participant&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;New Attendee&quot;,&quot;pt-PT&quot;:&quot;Novo Participante&quot;,&quot;fr-FR&quot;:&quot;Nouveau Participant&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="SHOW_GEO_MAP" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Show Geographic Map&quot;,&quot;pt-PT&quot;:&quot;Mostrar Mapa Geográfico&quot;,&quot;fr-FR&quot;:&quot;Voir la carte géographique&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Show Geographic Map&quot;,&quot;pt-PT&quot;:&quot;Mostrar Mapa Geográfico&quot;,&quot;fr-FR&quot;:&quot;Voir la carte géographique&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="true" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="SHOW_ROUTE_GEO_MAP" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Show Route in Geographic Map&quot;,&quot;pt-PT&quot;:&quot;Mostrar Rota no Mapa Geográfico&quot;,&quot;fr-FR&quot;:&quot;Montrer un itinéraire sur la carte géographique&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Show Route in Geographic Map&quot;,&quot;pt-PT&quot;:&quot;Mostrar Rota no Mapa Geográfico&quot;,&quot;fr-FR&quot;:&quot;Montrer un itinéraire sur la carte géographique&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="true" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="SHOW_SVG_MAP" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Show SVG Map&quot;,&quot;pt-PT&quot;:&quot;Mostrar Mapa Layout&quot;,&quot;fr-FR&quot;:&quot;Montrer la carte SVG&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Show SVG Map&quot;,&quot;pt-PT&quot;:&quot;Mostrar Mapa Layout&quot;,&quot;fr-FR&quot;:&quot;Montrer la carte SVG&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="true" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="GIVE_NOTEBOOK" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Give Note book&quot;,&quot;pt-PT&quot;:&quot;Oferecer Caderno&quot;,&quot;fr-FR&quot;:&quot;Donner un livre de notes&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Give Note book&quot;,&quot;pt-PT&quot;:&quot;Oferecer Caderno&quot;,&quot;fr-FR&quot;:&quot;Donner un livre de notes&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="true" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="SELFIE" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Selfie&quot;,&quot;pt-PT&quot;:&quot;Selfie&quot;,&quot;fr-FR&quot;:&quot;Selfie&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Selfie&quot;,&quot;pt-PT&quot;:&quot;Selfie&quot;,&quot;fr-FR&quot;:&quot;Selfie&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="Billable" valueBoolean="true" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="EXECUTE_ATTENDEE_DEMO" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Attendee Demo&quot;,&quot;pt-PT&quot;:&quot;Demo de Participante&quot;,&quot;fr-FR&quot;:&quot;Démonstration pour participant&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Demo for: {{ORDER}}&quot;,&quot;pt-PT&quot;:&quot;Demo para: {{ORDER}}&quot;,&quot;fr-FR&quot;:&quot;Démonstration par: {{ORDER}}&quot;}" />
+            <column name="MobileUrl" value="/plugins-static/gartnerbarcelona2015/mobile/demo/index.html" />
+            <column name="ShowInDeviceWorkList" valueBoolean="true" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="true" />
+            <column name="Billable" valueBoolean="false" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="ATTENDEE_DEMO_STARTED" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Demo Started&quot;,&quot;pt-PT&quot;:&quot;Demo a ser executada&quot;,&quot;fr-FR&quot;:&quot;Démonstration a commencé&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Demo Started&quot;,&quot;pt-PT&quot;:&quot;Demo a ser executada&quot;,&quot;fr-FR&quot;:&quot;Démonstration a commencé&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="ShowInDeviceWorkList" valueBoolean="false" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="false" />
+            <column name="Billable" valueBoolean="false" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="MovementType">
+            <column name="Code" value="ATTENDEE_DEMO_COMPLETED" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Demo Completed&quot;,&quot;pt-PT&quot;:&quot;Demo Concluída&quot;,&quot;fr-FR&quot;:&quot;Démonstration terminé&quot;}" />
+            <column name="ShortDescription"
+                    value="{&quot;en-GB&quot;:&quot;Demo Completed&quot;,&quot;pt-PT&quot;:&quot;Demo Concluída&quot;,&quot;fr-FR&quot;:&quot;Démonstration terminé&quot;}" />
+            <column name="MobileUrl" value="" />
+            <column name="ShowInDeviceWorkList" valueBoolean="false" />
+            <column name="SynchronizeMovementsToDevice" valueBoolean="false" />
+            <column name="Billable" valueBoolean="false" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert  schemaName="public" tableName="ContainerType">
+            <column name="Code" value="CANDY_BOX" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Candy Box&quot;,&quot;pt-PT&quot;:&quot;Caixa de Doces&quot;,&quot;fr-FR&quot;:&quot;Bonbonnière&quot;}" />
+            <column name="Size" valueNumeric="2" />
+            <column name="TareWeight" valueNumeric="2" />
+            <column name="LabelCopies" valueNumeric="0" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="CargoType">
+            <column name="Code" value="CANDY" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Candy&quot;,&quot;pt-PT&quot;:&quot;Doces&quot;,&quot;fr-FR&quot;:&quot;Céramique ou Porcelaine&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="ItemStatus">
+            <column name="Id" valueNumeric="1" />
+            <column name="Code" value="IN_DEMO"/>
+            <column name="Description" value="{&quot;en-GB&quot;:&quot;In Demo&quot;,&quot;pt-PT&quot;:&quot;Na Demo&quot;,&quot;fr-FR&quot;:&quot;In Démonstration&quot;}"/>
+            <column name="NeedsLocation" valueBoolean="false"/>
+            <column name="Archived" valueBoolean="false"/>
+            <column name="ContainerDefault" valueBoolean="true"/>
+            <column name="CargoDefault" valueBoolean="true"/>
+        </insert>
+        <sql>UPDATE "KVS" SET "Value" = '[{"label":{&quot;en-GB&quot;:&quot;Register Attendee&quot;,&quot;pt-PT&quot;:&quot;Registar Participante&quot;,&quot;fr-FR&quot;:&quot;Enregistrer Participant&quot;},"pluginUrl":"/plugins-static/gartnerbarcelona2015/mobile/registerAttendee/index.html"}]' WHERE "Key" = 'mobile-actions';</sql>
+        <insert schemaName="public" tableName="Shape">
+            <column name="Id" valueNumeric="1"/>
+            <column name="Code" value="EMERGING_THEATRE" />
+            <column name="Name"
+                    value="{&quot;en-GB&quot;:&quot;Emerging Tech Theatre&quot;,&quot;pt-PT&quot;:&quot;Emerging Tech Theatre&quot;,&quot;fr-FR&quot;:&quot;Emerging Tech Theatre&quot;}"/>
+            <column name="SVGMarkup"
+                    value="&lt;g&gt;&lt;rect x=&quot;289.42541&quot; y=&quot;40&quot; width=&quot;154&quot; height=&quot;430&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(294.42541 45)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;12&quot; font-weight=&quot;500&quot; x=&quot;32.085937&quot; y=&quot;11&quot; textLength=&quot;54.691406&quot;&gt;Emerging &lt;/tspan&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;12&quot; font-weight=&quot;500&quot; x=&quot;86.566406&quot; y=&quot;11&quot; textLength=&quot;7.330078&quot;&gt;T&lt;/tspan&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;12&quot; font-weight=&quot;500&quot; x=&quot;92.566406&quot; y=&quot;11&quot; textLength=&quot;19.347656&quot;&gt;ech&lt;/tspan&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;12&quot; font-weight=&quot;500&quot; x=&quot;51.322266&quot; y=&quot;25&quot; textLength=&quot;41.355469&quot;&gt;Theatre&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;289.42541&quot; y=&quot;205.60938&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(289.42541 228.0625)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.57248&quot; y=&quot;10&quot; textLength=&quot;26.291504&quot;&gt;ET16&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;289.42541&quot; y=&quot;242.40234&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(289.42541 264.85547)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.57248&quot; y=&quot;10&quot; textLength=&quot;26.291504&quot;&gt;ET15&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;289.42541&quot; y=&quot;279.35547&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(289.42541 301.8086)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.57248&quot; y=&quot;10&quot; textLength=&quot;26.291504&quot;&gt;ET14&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;289.42541&quot; y=&quot;316.3086&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(289.42541 338.76172)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.57248&quot; y=&quot;10&quot; textLength=&quot;26.291504&quot;&gt;ET13&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;341.32597&quot; y=&quot;380.97656&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(341.32597 403.42969)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET8&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;341.32597&quot; y=&quot;417.92969&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(341.32597 440.3828)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET7&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;378.76243&quot; y=&quot;393.57422&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(378.76243 416.02734)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET2&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;378.76243&quot; y=&quot;430.52734&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(378.76243 452.98047)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET1&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;406.13812&quot; y=&quot;343.1836&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(406.13812 365.63672)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET3&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;406.13812&quot; y=&quot;306.23047&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(406.13812 328.6836)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET4&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;368.70166&quot; y=&quot;292.79297&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(368.70166 315.2461)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.57248&quot; y=&quot;10&quot; textLength=&quot;26.291504&quot;&gt;ET10&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;368.70166&quot; y=&quot;329.7461&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(368.70166 352.19922)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET9&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;390.67403&quot; y=&quot;241.5625&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(390.67403 264.01562)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET5&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;390.67403&quot; y=&quot;204.60938&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(390.67403 227.0625)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;8.631318&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET6&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;353.23757&quot; y=&quot;191.17188&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(353.23757 213.625)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.57248&quot; y=&quot;10&quot; textLength=&quot;26.291504&quot;&gt;ET12&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;353.23757&quot; y=&quot;228.125&quot; width=&quot;37.436464&quot; height=&quot;36.953125&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;&lt;text transform=&quot;translate(353.23757 252.57812)&quot; fill=&quot;black&quot;&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;5.9779977&quot; y=&quot;10&quot; textLength=&quot;20.173828&quot;&gt;ET1&lt;/tspan&gt;&lt;tspan font-family=&quot;Helvetica&quot; font-size=&quot;11&quot; font-weight=&quot;500&quot; x=&quot;25.34079&quot; y=&quot;10&quot; textLength=&quot;6.1176758&quot;&gt;1&lt;/tspan&gt;&lt;/text&gt;&lt;/g&gt;" />
+            <column name="Width" valueNumeric="733" />
+            <column name="Height" valueNumeric="668" />
+        </insert>
+        <insert schemaName="public" tableName="Shape">
+            <column name="Id" valueNumeric="2"/>
+            <column name="Code" value="BOOTH" />
+            <column name="Name"
+                    value="{&quot;en-GB&quot;:&quot;Booth&quot;,&quot;pt-PT&quot;:&quot;Stand&quot;,&quot;fr-FR&quot;:&quot;Stand&quot;}"/>
+            <column name="SVGMarkup"
+                    value="&lt;g&gt;&lt;path fill=&quot;#030104&quot; d=&quot;M5.2,10.4c-1.1,0-2.2-0.4-3.1-1C-0.2,7.7-0.7,4.5,1,2.2C2.1,0.7,3.6,0,5.2,0c1.1,0,2.2,0.4,3.1,1c2.3,1.7,2.8,4.9,1.1,7.2C8.5,9.5,6.9,10.4,5.2,10.4 M5.2,2.2c-0.9,0-1.8,0.5-2.3,1.2C1.9,4.8,2.2,6.5,3.5,7.6C4,8,4.7,8.1,5.3,8.1c0.9,0,1.8-0.5,2.3-1.2C8.6,5.6,8.3,3.7,7,2.8C6.5,2.4,6,2.2,5.2,2.2&quot;/&gt;&lt;path fill=&quot;#030104&quot; d=&quot;M24.8,29.7c-1.1,0-2.2-0.4-3.1-1c-2.3-1.7-2.8-4.9-1.1-7.2c1-1.3,2.6-2.2,4.2-2.2c1.1,0,2.2,0.4,3.1,1c1.1,0.8,1.9,2,2.1,3.4c0.3,1.3-0.1,2.7-0.9,3.8C27.9,28.9,26.4,29.7,24.8,29.7 M24.8,21.7c-0.9,0-1.9,0.4-2.3,1.1c-0.9,1.3-0.7,3.2,0.7,4.1c0.5,0.4,1.1,0.6,1.8,0.6c0.9,0,1.9-0.4,2.3-1.1c0.5-0.7,0.7-1.4,0.5-2.2c-0.1-0.7-0.5-1.4-1.1-1.9C25.9,21.9,25.3,21.7,24.8,21.7&quot;/&gt;&lt;path fill=&quot;#A63A2D&quot; d=&quot;M19.5,9.1c3.4,2.4,4.1,7.1,1.7,10.4s-7.1,4.1-10.4,1.7S6.7,14,9.1,10.8C11.4,7.4,16.1,6.6,19.5,9.1&quot;/&gt;&lt;path fill=&quot;#030104&quot; d=&quot;M15,24.2c-2,0-3.8-0.6-5.4-1.8c-2-1.5-3.4-3.6-3.6-6.1c-0.4-2.4,0.2-4.9,1.7-6.9c1.8-2.4,4.6-3.8,7.5-3.8c2,0,3.8,0.6,5.4,1.8c2,1.5,3.4,3.6,3.6,6.1c0.4,2.5-0.2,4.9-1.7,6.9C20.8,22.8,18,24.2,15,24.2 M15,8c-2.2,0-4.3,1.1-5.6,2.8c-1.1,1.5-1.5,3.4-1.2,5.1c0.4,1.9,1.2,3.4,2.7,4.6c1.1,0.9,2.6,1.3,4.1,1.3c2.2,0,4.3-1.1,5.6-2.8c1.1-1.5,1.5-3.4,1.2-5.1c-0.4-1.9-1.2-3.4-2.7-4.6C18,8.4,16.5,8,15,8&quot;/&gt;&lt;/g&gt;"/>
+            <column name="Width" valueNumeric="31" />
+            <column name="Height" valueNumeric="31" />
+        </insert>
+        <insert schemaName="public" tableName="LocationType">
+            <column name="Id" valueNumeric="1"/>
+            <column name="Code" value="EMERGING_THEATRE" />
+            <column name="CanContainMovableItem" valueBoolean="false" />
+            <column name="ShapeId" valueNumeric="1"/>
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Emerging Tech Theatre&quot;,&quot;pt-PT&quot;:&quot;Emerging Tech Theatre&quot;,&quot;fr-FR&quot;:&quot;Emerging Tech Theatre&quot;}" />
+            <column name="Archived" valueBoolean="false"/>
+        </insert>
+        <insert schemaName="public" tableName="LocationType">
+            <column name="Id" valueNumeric="2"/>
+            <column name="Code" value="BOOTH" />
+            <column name="CanContainMovableItem" valueBoolean="true" />
+            <column name="ShapeId" valueNumeric="2" />
+            <column name="Description"
+                    value="{&quot;en-GB&quot;:&quot;Booth&quot;,&quot;pt-PT&quot;:&quot;Stand&quot;,&quot;fr-FR&quot;:&quot;Stand&quot;}" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="Location">
+            <column name="Id" valueNumeric="1"/>
+            <column name="Code" value="EMERGING_TECH"/>
+            <column name="LocationTypeId" valueNumeric="1"/>
+            <column name="Description" value="{&quot;en-GB&quot;:&quot;Emerging Tech Theatre&quot;,&quot;pt-PT&quot;:&quot;Emerging Tech Theatre&quot;,&quot;fr-FR&quot;:&quot;Emerging Tech Theatre&quot;}"/>
+            <column name="Prefix" value="YD" />
+            <column name="&quot;X&quot;" valueNumeric="0.00"/>
+            <column name="&quot;Y&quot;" valueNumeric="0.00"/>
+            <column name="&quot;Z&quot;" valueNumeric="0.00"/>
+            <column name="Rotation" valueNumeric="0"/>
+            <column name="RotationPointX" valueNumeric="350"/>
+            <column name="RotationPointY" valueNumeric="350"/>
+            <column name="Archived" valueBoolean="false"/>
+            <column name="Visible" valueBoolean="true"/>
+            <column name="SyncTimestamp" valueNumeric="0"/>
+        </insert>
+        <sql>UPDATE "Location" SET "LatLong" = ST_GeomFromText('POINT(2.219047 41.409408)') WHERE "Code" = 'EMERGING_TECH';</sql>
+        <insert schemaName="public" tableName="Location">
+            <column name="Id" valueNumeric="2"/>
+            <column name="Code" value="ATOMIZE_BOOTH"/>
+            <column name="LocationTypeId" valueNumeric="2"/>
+            <column name="ParentLocationId" valueNumeric="1" />
+            <column name="Description" value="{&quot;en-GB&quot;:&quot;Atomize Booth&quot;,&quot;pt-PT&quot;:&quot;Stand Atomize&quot;,&quot;fr-FR&quot;:&quot;Atomize Stand&quot;}"/>
+            <column name="Prefix" value="YD" />
+            <column name="&quot;X&quot;" valueNumeric="357"/>
+            <column name="&quot;Y&quot;" valueNumeric="228.2"/>
+            <column name="&quot;Z&quot;" valueNumeric="0.00"/>
+            <column name="Rotation" valueNumeric="0"/>
+            <column name="RotationPointX" valueNumeric="350"/>
+            <column name="RotationPointY" valueNumeric="350"/>
+            <column name="Archived" valueBoolean="false"/>
+            <column name="Visible" valueBoolean="true"/>
+            <column name="SyncTimestamp" valueNumeric="0"/>
+        </insert>
+        <insert schemaName="public" tableName="LocationPath">
+            <column name="AncestorId" valueNumeric="1"/>
+            <column name="DescendantId" valueNumeric="1"/>
+            <column name="Depth" valueNumeric="0"/>
+        </insert>
+        <insert schemaName="public" tableName="LocationPath">
+            <column name="AncestorId" valueNumeric="2"/>
+            <column name="DescendantId" valueNumeric="2"/>
+            <column name="Depth" valueNumeric="0"/>
+        </insert>
+        <insert schemaName="public" tableName="LocationPath">
+            <column name="AncestorId" valueNumeric="1"/>
+            <column name="DescendantId" valueNumeric="2"/>
+            <column name="Depth" valueNumeric="1"/>
+        </insert>
+        <insert schemaName="public" tableName="MovableItem">
+            <column name="MovableItemTypeId" valueNumeric="2" />
+            <column name="ItemStatusId" valueNumeric="1"/>
+            <column name="DangerousCargo" valueBoolean="false" />
+            <column name="Weight" valueNumeric="2" />
+            <column name="GrossWeight" valueNumeric="2" />
+            <column name="WeightUnit" value="Kgs." />
+        </insert>
+        <insert schemaName="public" tableName="MovableItem">
+            <column name="MovableItemTypeId" valueNumeric="2" />
+            <column name="ItemStatusId" valueNumeric="1"/>
+            <column name="DangerousCargo" valueBoolean="false" />
+            <column name="Weight" valueNumeric="2" />
+            <column name="GrossWeight" valueNumeric="2" />
+            <column name="WeightUnit" value="Kgs." />
+        </insert>
+        <insert schemaName="public" tableName="MovableItem">
+            <column name="MovableItemTypeId" valueNumeric="2" />
+            <column name="ItemStatusId" valueNumeric="1"/>
+            <column name="DangerousCargo" valueBoolean="false" />
+            <column name="Weight" valueNumeric="2230.000000" />
+            <column name="GrossWeight" valueNumeric="2230.000000" />
+            <column name="WeightUnit" value="Kgs." />
+        </insert>
+        <insert schemaName="public" tableName="Container">
+            <column name="Id" valueNumeric="1"/>
+            <column name="Number" value="Candy Box 1"/>
+            <column name="ContainerTypeId" valueNumeric="1"/>
+            <column name="AssignedForLoading" valueBoolean="false"/>
+            <column name="Archived" valueBoolean="false"/>
+        </insert>
+        <insert schemaName="public" tableName="Container">
+            <column name="Id" valueNumeric="2"/>
+            <column name="Number" value="Candy Box 2"/>
+            <column name="ContainerTypeId" valueNumeric="1"/>
+            <column name="AssignedForLoading" valueBoolean="false"/>
+            <column name="Archived" valueBoolean="false"/>
+        </insert>
+        <insert schemaName="public" tableName="Container">
+            <column name="Id" valueNumeric="3"/>
+            <column name="Number" value="Candy Box 3"/>
+            <column name="ContainerTypeId" valueNumeric="1"/>
+            <column name="AssignedForLoading" valueBoolean="false"/>
+            <column name="Archived" valueBoolean="false"/>
+        </insert>
+        <insert schemaName="public" tableName="MovableItem">
+            <column name="MovableItemTypeId" valueNumeric="1"/>
+            <column name="ItemStatusId" valueNumeric="1"/>
+            <column name="DangerousCargo" valueBoolean="false"/>
+            <column name="Weight" valueNumeric="0.020"/>
+            <column name="GrossWeight" valueNumeric="0.020"/>
+            <column name="WeightUnit" value="Kgs."/>
+            <column name="ParentId" valueNumeric="1"/>
+        </insert>
+        <insert schemaName="public" tableName="MovableItem">
+            <column name="MovableItemTypeId" valueNumeric="1"/>
+            <column name="ItemStatusId" valueNumeric="1"/>
+            <column name="DangerousCargo" valueBoolean="false"/>
+            <column name="Weight" valueNumeric="0.020"/>
+            <column name="GrossWeight" valueNumeric="0.20"/>
+            <column name="WeightUnit" value="Kgs."/>
+            <column name="ParentId" valueNumeric="2"/>
+        </insert>
+        <insert schemaName="public" tableName="MovableItem">
+            <column name="MovableItemTypeId" valueNumeric="1" />
+            <column name="ItemStatusId" valueNumeric="1"/>
+            <column name="DangerousCargo" valueBoolean="false" />
+            <column name="Weight" valueNumeric="0.020" />
+            <column name="GrossWeight" valueNumeric="0.020" />
+            <column name="WeightUnit" value="Kgs." />
+            <column name="ParentId" valueNumeric="3"/>
+        </insert>
+        <insert schemaName="public" tableName="Cargo">
+            <column name="Id" valueNumeric="4" />
+            <column name="CargoTypeId" valueNumeric="1" />
+            <column name="Number" value="Candy 1" />
+            <column name="Description"
+                    value="Candy in a Box" />
+            <column name="Quantity" valueNumeric="3336" />
+            <column name="AvailableQty" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="Cargo">
+            <column name="Id" valueNumeric="5" />
+            <column name="CargoTypeId" valueNumeric="1" />
+            <column name="Number" value="Candy 2" />
+            <column name="Description"
+                    value="Candy in a Box" />
+            <column name="Quantity" valueNumeric="3336" />
+            <column name="AvailableQty" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <insert schemaName="public" tableName="Cargo">
+            <column name="Id" valueNumeric="6" />
+            <column name="CargoTypeId" valueNumeric="1" />
+            <column name="Number" value="Candy 3" />
+            <column name="Description"
+                    value="Candy 3" />
+            <column name="Quantity" valueNumeric="3336" />
+            <column name="AvailableQty" />
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+        <sql>ALTER SEQUENCE "Location_Id_seq" RESTART WITH 3 INCREMENT BY 1;</sql>
+        <sql>ALTER SEQUENCE "LocationType_Id_seq" RESTART WITH 3 INCREMENT BY 1;</sql>
+        <sql>ALTER SEQUENCE "Shape_Id_seq" RESTART WITH 3 INCREMENT BY 1;</sql>
+        <sql>ALTER SEQUENCE "ItemStatus_Id_seq" RESTART WITH 2 INCREMENT BY 1;</sql>
+        <sql>Update "User" SET "TableDefinitions" = '{"movements": ["inStatusSince", "movementTypeId", "movementStatusId", "itemId", "orderId", "updateUserId","userDefinedFields","deviceId"]}';</sql>
+        <sql>Update "MovementType" SET "MovementMetadata" = '{"movementFields": [{"name":"movementStatusId","showOnEdit":true}, {"name":"movementTypeId","showOnEdit":true},{"name":"orderId","showOnEdit":true},{"name":"userDefinedFields"},{"name":"inStatusSince"},{"name":"deviceId"},{"name":"updateUserId"},{"name":"itemId"}]}'</sql>
+        <insert schemaName="public" tableName="Menu">
+            <column name="Code" value="MA"/>
+            <column name="Url" value="dashboard"/>
+            <column name="Icon" value="fa-dashboard"/>
+            <column name="Description" value="{&quot;en-GB&quot;:&quot;Dashboard&quot;,&quot;pt-PT&quot;:&quot;Dashboard&quot;,&quot;fr-FR&quot;:&quot;Dashboard&quot;}"/>
+            <column name="Archived" valueBoolean="false"/>
+        </insert>
+        <sql>INSERT INTO "GroupMenu" ("GroupId","MenuId") Values ((Select "Id" from "Group" where "Code" = 'ADMINS'),(Select "Id" from "Menu" where "Code" = 'MA'))</sql>
+    </changeSet>
+</databaseChangeLog>

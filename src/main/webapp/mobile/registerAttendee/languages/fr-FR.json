@@ -1,0 +1,26 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "back": "Retour",
+        "send": "Envoyer"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "Une erreur inattendue s'est produite, s'il vous plaît communiquer avec le service."
+    },
+    "errorLabels": {
+        "title": "Erreur"
+    },
+    "errorMessages": {
+        "unableToRegister": "Impossible d'enregistrer le participant, s'il vous plaît essayer de nouveau ou communiquer avec le service."
+    },
+    "registerLabels": {
+        "title": "New Attendee",
+        "badge": "Badge",
+        "scan": "Scan",
+        "name": "Nombre",
+        "company": "Enterprise"
+    },
+    "registerDescriptions": {
+        "warningClosing": "Toutes les données seront perdues.\n\n\nContinuer?"
+    }
+}

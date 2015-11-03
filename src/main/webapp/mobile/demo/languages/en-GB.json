@@ -1,0 +1,30 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "back": "Back",
+        "send": "Send"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "An unexpected error occurred, please contact the office."
+    },
+    "errorLabels": {
+        "title": "Erro"
+    },
+    "errorMessages": {
+        "unableToPerformDemo": "Unable to proceed with the demo, please  try again or contact support."
+    },
+    "demoLabels": {
+        "title": "Attendee Demo",
+        "performTracking": "Track an item",
+        "showGeoMap": "Show Geographic Map",
+        "showRoute": "Show Route in Geographic Map",
+        "showLayoutMap": "Show SVG Map with details",
+        "takeSelfie":  "Take a Selfie",
+        "giveNotebook": "Give a Notebook",
+        "endDemo": "End Demo",
+        "scan": "Scan"
+    },
+    "demoDescriptions": {
+        "warningClosing": "All data will be lost.\n\n\n Continue ?"
+    }
+}

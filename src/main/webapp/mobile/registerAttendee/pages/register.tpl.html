@@ -1,0 +1,29 @@
+<section>
+    <form name="register" novalidate>
+        <section class="body-margin">
+            <div class="register-form">
+                <div class="clearfix">
+                    <label for="badge" class="control-label required">{{labels.Badge}}</label>
+                    <input id="badge" class="input col-xs-12" data-ng-model="attendee.badge" name="badge" type="text"
+                           data-mb-auto-focus="focus" required/>
+                </div>
+                <div class="clearfix">
+                    <label for="name" class="control-label required">{{labels.Name}}</label>
+                    <input id="name" class="input col-xs-12" data-ng-model="attendee.name" name="name" type="text" required/>
+                </div>
+                <div class="clearfix">
+                    <label for="company" class="control-label">{{labels.Company}}</label>
+                    <input id="company" class="input col-xs-12" name="company" type="text" data-ng-model="attendee.company" required/>
+                </div>
+            </div>
+            <div class="register-buttons">
+                <div data-ng-if="showBarcodeScan" class="text-center full-width space-bottom-xs">
+                    <button data-ng-click="scanCode()" type="button" class="round-button">{{labels.Scan}}</button>
+                </div>
+                <button class="btn btn-lg btn-action pull-right" data-ng-disabled="register.$invalid"
+                        data-ng-click="registerAttendee(attendee)">{{globalLabels.Ok}}</button>
+                <button type="button" class="btn btn-lg" data-ng-click="closePage()">{{globalLabels.Back}}</button>
+            </div>
+        </section>
+    </form>
+</section>

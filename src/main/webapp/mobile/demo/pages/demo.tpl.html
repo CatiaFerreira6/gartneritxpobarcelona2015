@@ -1,0 +1,52 @@
+<section>
+    <form name="demoChecklist" novalidate>
+        <section class="body-margin">
+            <ul class="demo-form">
+                <li class="clearfix">
+                    <button type="button" class="btn btn-lg col-xs-12" data-ng-class="{'btn-action': demo.performTracking}" data-ng-click="performTracking()">
+                        <i class="fa" data-ng-class="{'fa-check-square-o': demo.performTracking, 'fa-square-o': !demo.performTracking}"></i>
+                        <span>{{labels.PerformTracking}}</span>
+                    </button>
+                </li>
+                <li class="clearfix">
+                    <button type="button" class="btn btn-lg col-xs-12" data-ng-class="{'btn-action': demo.showGeoMap}" data-ng-click="showGeoMap()">
+                        <i class="fa" data-ng-class="{'fa-check-square-o': demo.showGeoMap, 'fa-square-o': !demo.showGeoMap}"></i>
+                        <span>{{labels.ShowGeoMap}}</span>
+                    </button>
+                </li>
+                <li class="clearfix">
+                    <button type="button" class="btn btn-lg col-xs-12" data-ng-class="{'btn-action': demo.showRoute}" data-ng-click="showRoute()">
+                        <i class="fa" data-ng-class="{'fa-check-square-o': demo.showRoute, 'fa-square-o': !demo.showRoute}"></i>
+                        <span>{{labels.ShowRoute}}</span>
+                    </button>
+                </li>
+                <li class="clearfix">
+                    <button type="button" class="btn btn-lg col-xs-12" data-ng-class="{'btn-action': demo.showSVG}" data-ng-click="showSVG()">
+                        <i class="fa" data-ng-class="{'fa-check-square-o': demo.showSVG, 'fa-square-o': !demo.showSVG}"></i>
+                        <span>{{labels.ShowLayoutMap}}</span>
+                    </button>
+                </li>
+                <li class="clearfix">
+                    <button type="button" class="btn btn-lg col-xs-12" data-ng-class="{'btn-action': demo.giveNotebook}" data-ng-click="giveNotebook()">
+                        <i class="fa" data-ng-class="{'fa-check-square-o': demo.giveNotebook, 'fa-square-o': !demo.giveNotebook}"></i>
+                        <span>{{labels.GiveNotebook}}</span>
+                    </button>
+                </li>
+                <li class="clearfix">
+                    <label for="selfie" class="control-label">{{labels.TakeSelfie}}</label>
+                    <div id="selfie" class="pictures col-xs-12">
+                        <div class="col-xs-9 col-sm-10 col-md-11">
+                            <img data-ng-repeat="image in demoSelfies" src="{{image.thumbnail}}">
+                        </div>
+                        <button class="btn btn-action btn-action-inverted pull-right col-xs-3 col-sm-2 col-md-1"
+                                data-ng-click="takePicture()"><i class="fa fa-camera fa-lg fa-2x"></i></button>
+                    </div>
+                </li>
+            </ul>
+            <div class="demo-buttons">
+                <button class="btn btn-lg btn-action pull-right" data-ng-click="finishDemo(demo, demoSelfies)">{{labels.EndDemo}}</button>
+                <button type="button" class="btn btn-lg" data-ng-click="closePage()">{{globalLabels.Back}}</button>
+            </div>
+        </section>
+    </form>
+</section>

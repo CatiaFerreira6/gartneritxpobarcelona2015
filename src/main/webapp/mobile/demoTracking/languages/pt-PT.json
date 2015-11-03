@@ -1,0 +1,49 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "next": "Continuar",
+        "back": "Voltar",
+        "send": "Enviar"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "Ocorreu um erro inesperado, por favor contacte o escritório."
+    },
+    "errorLabels": {
+        "title": "Erro"
+    },
+    "errorMessages": {
+        "locationNotFound": "A localização não foi encontrada.",
+        "locationCannotContainItems": "A localização não pode conter itens.",
+        "unableToSendItems": "Não foi possível enviar os itens, por favor tente novamente ou contacte o escritório.",
+        "itemAlreadyOnTrackingList": "Este item já se encontra na lista de tracking"
+    },
+    "trackingLabels": {
+        "remove": "Remover",
+        "count": "Nº de itens:",
+        "container": "Contentor",
+        "cargo": "Carga",
+        "location": "Localização",
+        "scan": "Ler",
+        "number": "Número",
+        "tracking": "Tracking",
+        "items": "itens"
+    },
+    "trackingDescriptions": {
+        "warningClosing": "Todos os dados serão perdidos.\n\n\nContinuar?",
+        "whatIs": "O que é ",
+        "readCode": "Localização ou Item",
+        "readItemNumber": "Contentor ou Content",
+        "locationCode": "Introduza uma localização",
+        "selectLocation": "Selecione uma localização",
+        "trackItem": "Track",
+        "inLocation": "na localização"
+    },
+    "resolverErrors": {
+        "userTitle": "Utilizador",
+        "deviceTitle": "Equipamento",
+        "lockWithoutConnection": "Não é possível iniciar um movimento sem uma ligação à rede.",
+        "movementParam": "Identificação do movimento não encontrada.",
+        "userParam": "Identificação do utilizador não encontrada.",
+        "deviceParam": "Identificação do equipamento não encontrada."
+    }
+}

@@ -1,0 +1,10 @@
+project/target
+project/project
+target
+.idea
+dist
+mqtt
+log
+application.conf
+build.sbt
+*.log

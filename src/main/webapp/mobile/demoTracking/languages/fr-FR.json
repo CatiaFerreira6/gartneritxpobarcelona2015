@@ -1,0 +1,48 @@
+{
+    "globalLabels": {
+        "ok": "Ok",
+        "next": "Suivant",
+        "back": "Retour",
+        "send": "Envoyer"
+    },
+    "globalErrorMessages": {
+        "unexpectedError": "Une erreur inattendue s'est produite, s'il vous plaît communiquer avec le service."
+    },
+    "errorLabels": {
+        "title": "Erreur"
+    },
+    "errorMessages": {
+        "locationNotFound": "La station donné n'á pas été trouvé.",
+        "locationCannotContainItems": "Le site donné peut pas contenir des éléments.",
+        "unableToSendItems": "Impossible d'envoyer des articles, s'il vous plaît essayer de nouveau ou communiquer avec le service.",
+        "itemAlreadyOnTrackingList": "Cet article est déjà sur la liste de tracking"
+    },
+    "trackingLabels": {
+        "remove": "Supprimer",
+        "count": "Quantité:",
+        "container": "Conteneur",
+        "cargo": "Frêt",
+        "location": "Station",
+        "scan": "Scan",
+        "number": "Numéro",
+        "tracking": "Tracking",
+        "items": "éléments"
+    },
+    "trackingDescriptions": {
+        "warningClosing": "Toutes les données seront perdues.\n\n\nContinuer?",
+        "whatIs": "Ce qui est ",
+        "readCode": "Station ou article",
+        "readItemNumber": "Conteneur ou Contenu",
+        "locationCode": "Code de la station",
+        "selectLocation": "Selectionner une station",
+        "trackItem": "Track",
+        "inLocation": "en emplacement"
+    },
+    "resolverErrors": {
+        "userTitle": "Utilisateur",
+        "deviceTitle": "Dispositif",
+        "movementParam": "Aucune identification de mouvement trouvé.",
+        "userParam": "Aucune identification de l'utilisateur trouvé.",
+        "deviceParam": "Aucune identification de dispositif trouvé."
+    }
+}
