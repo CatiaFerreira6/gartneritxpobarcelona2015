@@ -1,7 +1,5 @@
 import AssemblyKeys._
 import sbtassembly.Plugin._
-import ohnosequences.sbt.SbtS3Resolver._
-import com.amazonaws.services.s3.model.Region
 import com.typesafe.config._
 
 val systemSeparator = System.getProperty("file.separator")
