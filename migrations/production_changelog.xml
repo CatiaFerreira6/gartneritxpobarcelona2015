@@ -426,4 +426,12 @@
         </insert>
         <sql>INSERT INTO "GroupMenu" ("GroupId","MenuId") Values ((Select "Id" from "Group" where "Code" = 'ADMINS'),(Select "Id" from "Menu" where "Code" = 'MA'))</sql>
     </changeSet>
+    <changeSet author="sofia" id="20151123094600" context="data">
+        <insert schemaName="public" tableName="Report">
+            <column name="Code" value="demo-report"/>
+            <column name="Description" value="{&quot;en-GB&quot;:&quot;Demo Report&quot;,&quot;pt-PT&quot;:&quot;Reporte da Demo&quot;,&quot;fr-FR&quot;:&quot;Demo Rapport&quot;}" />
+            <column name="PluginUrl" value="/plugins-static/gartnerbarcelona2015/admin/reports/demo-report/demo-report.html"/>
+            <column name="Archived" valueBoolean="false" />
+        </insert>
+    </changeSet>
 </databaseChangeLog>
