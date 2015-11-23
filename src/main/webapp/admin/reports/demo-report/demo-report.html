@@ -1,0 +1,15 @@
+<form name="demoReportParametersForm" data-ng-controller="DemoReportController">
+  <ul class="row-fluid">
+    <li class="span3">
+      <label class="span3" for="demo-number">{{localizedLabel(labels.Demo)}}</label>
+      <select class="span9" id="demo-number" name="demo-number"
+              data-ng-options="order.number as order.number for order in orders | orderBy:number"
+              data-ng-model="demoReportParameters.demoNumber" required></select>
+    </li>
+  </ul>
+  <div class="row-fluid">
+    <button class="btn save-btn span1 pull-right"
+            data-ng-disabled="demoReportParametersForm.$invalid"
+            data-ng-click="convertParametersToURIString()">OK</button>
+  </div>
+</form>
